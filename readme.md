@@ -3,13 +3,22 @@
 # Coding Badges
 ![alt text](https://img.shields.io/badge/Node.js-modules-green)
 ![alt text](https://img.shields.io/badge/JavaScript-.js-yellowgreen)
-![alt text](https://img.shields.io/badge/HTML-.html-orange)
-![alt text](https://img.shields.io/badge/Jest%20Test-jest-red)
 
 # Description
+A CLI-Based application for maintaining and controlling information pertaining to employee's, what their position is and how much that position makes.
 
-A CLI-Based application for maintaining data as it relates to employees
+# Requirements
+1. Download this repo
+2. open the repo inside Virtual Studios Code
+3. go to the terminal and run npm i
+4. then log into mysql and run `Source schema.sql`
+5. if you want to try out the demo in this then run `Source seeds.sql`
+6. if not skip step above
+7. then run `node server.js`
+8. it will prompt you to ask you what you would like to do.
+9. follow prompts and build your team!
 
+# User Story
 GIVEN a command-line application that accepts user input
 
 WHEN I start the application THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
@@ -30,7 +39,7 @@ WHEN I choose to update an employee role THEN I am prompted to select an employe
 
 # Demo
 Here is a link to me doing a demo of using the application
-[Demo]()
+[Demo](assets/mp4/Demo.mp4)
 
 ## License
 Please refer to the license in the github repo.

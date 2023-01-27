@@ -1,0 +1,24 @@
+{
+  "name": "employee-database",
+  "version": "1.0.0",
+  "description": "A CLI-Based application for maintaining data as it relates to employees",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marcosauras/Employee-Database.git"
+  },
+  "author": "Marc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Marcosauras/Employee-Database/issues"
+  },
+  "homepage": "https://github.com/Marcosauras/Employee-Database#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.4",
+    "mysql2": "^3.0.1"
+  }
+}
