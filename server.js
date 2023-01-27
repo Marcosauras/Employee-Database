@@ -14,12 +14,12 @@ dbConnection.connect(function (err) {
     if (err){
         console.log(err)
     }else{
-        initialList();
+        startPrompt();
     }
   
 });
 
-function initialList() {
+function startPrompt() {
     inquirer
     .prompt({
         type: 'list',
@@ -40,10 +40,10 @@ function initialList() {
     }).then(function ({ task }) {
         switch(task) {
             case "View all Employees":
-                showAllEmployees();
+                showStoredEmployees();
                 break;
             case "Add Employee":
-                addNewEmployee();
+                createNewEmployee();
                 break;
             case "Update an Employee's Role":
                 updateEmployeeRole();
@@ -52,13 +52,13 @@ function initialList() {
                 showAllRoles();
                 break;
             case "Add Role":
-                addNewRole();
+                createNewRole();
                 break;
             case "View all Departments":
               showAllDepartments();
               break;
             case "Add a Department":
-              addNewDepartment();
+              createNewDepartment();
               break;
             case "I'm Done'":
                 console.log("\n Good Bye!")
@@ -67,7 +67,7 @@ function initialList() {
         }
     })
 }
-function showAllEmployees() {
+function showStoredEmployees() {
 
     dbConnection.query(`SELECT employee.id AS "Employee ID",
     employee.first_name AS "First Name",
@@ -87,17 +87,16 @@ function showAllEmployees() {
     `, function (err, results){
         if(err){
             console.log(err);
-            initialList();
-        } else{
+            startPrompt();
+        }
             console.table('\n Here are all the employees in the company:', results); 
             console.table("What would you like to do now")
-            initialList();
-        }
+            startPrompt();
 
     })
 }
 // todo need to add role generator
-function addNewEmployee(){
+function createNewEmployee(){
 
 // asks user if what the name of the employee is
     inquirer.prompt([
@@ -155,7 +154,7 @@ function addNewEmployee(){
                                         console.log(error)
                                     } else{
                                         console.log("\n Added Employee \n");
-                                        initialList();
+                                        startPrompt();
                                     }
                                 })
                             })
@@ -169,12 +168,10 @@ function addNewEmployee(){
 
 function updateEmployeeRole(){
     let sqlCommand = `SELECT * FROM employees`
-
-    
     dbConnection.query(sqlCommand, function (err, results){
         if (err){
             console.log(err);
-        } else{
+        }
             let allEmployees = [];
             results.forEach(results => {
             allEmployees.push( results.id + " " + results.first_name + " " + results.last_name);
@@ -194,7 +191,7 @@ function updateEmployeeRole(){
                 dbConnection.query(sqlCommand, function (error, results){
                     if(error){
                         console.log(error)
-                    } else{
+                    }
                         employeeNewRole = [];
                         results.forEach(results => {
                             employeeNewRole.push(results.title)
@@ -213,7 +210,7 @@ function updateEmployeeRole(){
                             dbConnection.query(sqlCommand, newRole, (error, results) => {
                                 if (error){
                                     console.log(error);
-                                }else{
+                                }
                                     let newRoleId = results[0].id
 
                                     let sqlCommand = `
@@ -227,17 +224,15 @@ function updateEmployeeRole(){
                                             console.log(error);
                                         }else{
                                             console.log(`\n You have updated an employee's role \n`);
-                                            initialList();
+                                            startPrompt();
                                         }
 
                                     })
-                                }
                             })
                         })
-                    }
                 })
             })
-        }})
+        })
 }
 
 // ShowAllRoles function
@@ -254,12 +249,12 @@ function showAllRoles() {
                 console.log(err)
             }else{
                 console.table('\n Here are all the roles in the company:', results); 
-                initialList();  
+                startPrompt();  
             }
         })
 }
 // Creates New role
-function addNewRole(){
+function createNewRole(){
     inquirer.prompt([
         {
             type: "input",
@@ -300,6 +295,7 @@ function addNewRole(){
                             console.log(error);
                         } else{
                             console.log(`\n Added New Role Named ${newRole[0]} \n`);
+                            startPrompt();
                         }
                     })
                 })
@@ -321,13 +317,12 @@ function showAllDepartments() {
             }else{
                 console.log("\n Here is a list of all the departments. \n")
                 console.table(results);        
-                initialList();
+                startPrompt();
             }
-    });
-        
+    });      
 }
 
-function addNewDepartment(){
+function createNewDepartment(){
     inquirer.prompt([
         {
             name: "newDepartment",
@@ -344,7 +339,7 @@ function addNewDepartment(){
                 console.log(error)
             } else{
                 console.log(`\n you have added the new Department called ${newDepartment}, \n Are you happy now??? WEll Leave me alone then.\n`)
-                initialList();
+                startPrompt();
             }
         })
     })
